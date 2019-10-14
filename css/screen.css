@@ -8,8 +8,11 @@
 
 :root {
     /* colors */
+    --color-dark: #0F3557;
+    --color-light: #CCE7FF;
 
     /* opacity */
+    --opacity-muted: 0.6;
 
     /* transitions */
 }
@@ -27,10 +30,18 @@
 html {
     font-size: 16px;
     line-height: 1.5;
-    font-family: Helvetica, arial, sans-serif;
+    font-family: "Work sans", Helvetica, arial, sans-serif;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: "zero" 1;
+    background: var(--color-back);
+    color: var(--color-front);
+    height: 100%;
+}
+
+body {
+    height: 100%;
 }
 
 *,
@@ -249,7 +260,12 @@ input::placeholder {
 */
 
 .c-logo {
-
+    font-size: 16px;
+    line-height: 16px;
+    font-weight: normal;
+    display: flex;
+    align-items: center;
+    margin-bottom: auto;
 }
 
 /*
@@ -259,11 +275,13 @@ input::placeholder {
 */
 
 .c-sun {
-
+    width: 22px;
+    height: 22px;
+    fill: var(--color-front);
 }
 
 .c-logo .c-sun {
-
+    margin-right: 8px;
 }
 
 /*
@@ -272,11 +290,70 @@ input::placeholder {
     Main app wrapper
 */
 
+.c-app {
+    max-width: 400px;
+    margin: 0 auto;
+    padding-top: 32px;
+    display: flex;
+    height: 100%;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.c-app__summary {
+    font-size: 28px;
+    line-height: 40px;
+}
+
 /*
     Component: Horizon
     ---
     Horizon with sun visualisation
 */
+
+.c-horizon__line {
+    border-top: 1px solid var(--color-front);
+    display: flex;
+    justify-content: space-between;
+    padding-top: 8px;
+    margin-bottom: 32px;
+}
+
+.c-horizon__time {
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.c-horizon__sky-wrapper {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+    padding: 22px 40px 0 0;
+}
+
+.c-horizon__sky {
+    position: relative;
+    height: 100%;
+}
+
+.c-horizon__sun::before {
+    content: attr(data-time);
+    font-size: 12px;
+    line-height: 14px;
+    display: block;
+    margin-bottom: 8px;
+    text-align: center;
+}
+
+.c-horizon__sun {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    transform: translateY(22px);
+}
 
 /*------------------------------------*\
 #UTILITIES
@@ -286,6 +363,10 @@ input::placeholder {
     Utilities: Mute
     Mute with opacity
 */
+.u-muted {
+    opacity: var(--opacity-muted);
+}
+
 
 /*------------------------------------*\
 #STATES
@@ -296,6 +377,16 @@ input::placeholder {
 */
 
 /* Night version: just switch the light and dark vars */
+
+.is-day {
+    --color-front: var(--color-dark);
+    --color-back: var(--color-light);
+ }
+
+.is-night {
+    --color-front: var(--color-light);
+    --color-back: var(--color-dark);
+ }
 
 /*------------------------------------*\
 #MEDIA
